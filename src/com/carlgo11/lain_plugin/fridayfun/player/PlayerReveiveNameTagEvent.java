@@ -1,5 +1,6 @@
 package com.carlgo11.lain_plugin.fridayfun.player;
 
+import com.carlgo11.lain_plugin.fridayfun.Main;
 import java.util.Calendar;
 import java.util.Random;
 import org.bukkit.event.EventHandler;
@@ -8,6 +9,14 @@ import org.kitteh.tag.PlayerReceiveNameTagEvent;
 
 public class PlayerReveiveNameTagEvent implements Listener {
 
+    Main plugin;
+
+    public PlayerReveiveNameTagEvent(Main plug)
+    {
+        super();
+        this.plugin = plug;
+    }
+    
     public int mojangday = 5;
     public int carlgoday = 0; //currently not enabled
 
@@ -40,6 +49,10 @@ public class PlayerReveiveNameTagEvent implements Listener {
             }
         } else if (currday == carlgoday) {
             e.setTag("carlgo11");
+        }else if(plugin.getConfig().getBoolean("custom-nick-mode")){
+            if(plugin.getConfig().contains("custom-nick")){
+                e.setTag(plugin.getConfig().getString("custom-nick"));
+            }
         }
     }
 
